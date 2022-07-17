@@ -1,26 +1,23 @@
-import React from "react";
+import React, { SetStateAction } from "react";
+import { Event } from "../../../type/type";
 import EventListItem from "./EventListItem";
 
 type Props = {
-  events: {
-    id: string;
-    title: string;
-    date: string;
-    category: string;
-    description: string;
-    city: string;
-    venue: string;
-    hostedBy: string;
-    hostPhotoURL: string;
-    attendees: { id: string; name: string; photoURL: string }[];
-  }[];
+  events: Event[];
+  selectEvent: (event: Event) => void;
+  deleteEvent: (id: string) => void;
 };
 
-export default function EventList({ events }: Props) {
+export default function EventList({ events, selectEvent, deleteEvent }: Props) {
   return (
     <>
       {events.map((event) => (
-        <EventListItem event={event} key={event.id}></EventListItem>
+        <EventListItem
+          event={event}
+          key={event.id}
+          selectEvent={selectEvent}
+          deleteEvent={deleteEvent}
+        ></EventListItem>
       ))}
     </>
   );

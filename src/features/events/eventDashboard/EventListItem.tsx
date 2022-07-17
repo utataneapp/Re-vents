@@ -1,21 +1,19 @@
 import React from "react";
 import { List, Icon, Item, Segment, Button } from "semantic-ui-react";
+import { Event } from "../../../type/type";
 import EventListAttendee from "./EventListAttendee";
 
 type Props = {
-  id: string;
-  title: string;
-  date: string;
-  category: string;
-  description: string;
-  city: string;
-  venue: string;
-  hostedBy: string;
-  hostPhotoURL: string;
-  attendees: { id: string; name: string; photoURL: string }[];
+  event: Event;
+  selectEvent: (event: Event) => void;
+  deleteEvent: (id: string) => void;
 };
 
-export default function EventListItem({ event }: { event: Props }) {
+export default function EventListItem({
+  event,
+  selectEvent,
+  deleteEvent,
+}: Props) {
   return (
     <Segment.Group>
       <Segment>
@@ -53,7 +51,18 @@ export default function EventListItem({ event }: { event: Props }) {
       </Segment>
       <Segment clearing>
         <div>{event.description}</div>
-        <Button color="teal" floated="right" content="View" />
+        <Button
+          onClick={() => deleteEvent(event.id)}
+          color="red"
+          floated="right"
+          content="Delete"
+        />
+        <Button
+          onClick={() => selectEvent(event)}
+          color="teal"
+          floated="right"
+          content="View"
+        />
       </Segment>
     </Segment.Group>
   );

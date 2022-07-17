@@ -1,19 +1,15 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { List, Icon, Item, Segment, Button } from "semantic-ui-react";
 import { Event } from "../../../type/type";
 import EventListAttendee from "./EventListAttendee";
 
 type Props = {
   event: Event;
-  selectEvent: (event: Event) => void;
   deleteEvent: (id: string) => void;
 };
 
-export default function EventListItem({
-  event,
-  selectEvent,
-  deleteEvent,
-}: Props) {
+export default function EventListItem({ event, deleteEvent }: Props) {
   return (
     <Segment.Group>
       <Segment>
@@ -58,7 +54,8 @@ export default function EventListItem({
           content="Delete"
         />
         <Button
-          onClick={() => selectEvent(event)}
+          as={NavLink}
+          to={`/events/${event.id}`}
           color="teal"
           floated="right"
           content="View"

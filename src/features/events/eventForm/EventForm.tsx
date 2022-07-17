@@ -8,6 +8,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import cuid from "cuid";
+import { NavLink } from "react-router-dom";
 
 type Props = {
   setFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -125,7 +126,8 @@ export default function EventForm({
           content="submit"
         ></Button>
         <Button
-          onClick={() => setFormOpen(false)}
+          as={NavLink}
+          to="/events"
           type="submit"
           floated="right"
           content="cancel"

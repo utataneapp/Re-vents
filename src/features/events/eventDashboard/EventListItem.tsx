@@ -55,7 +55,7 @@ export default function EventListItem({ event, deleteEvent }: Props) {
         />
         <Button
           as={NavLink}
-          to={`/events/${event.id}`}
+          to={"/events/:id"}
           color="teal"
           floated="right"
           content="View"

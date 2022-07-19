@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactComponentElement, useState } from "react";
 import { Event } from "../../../type/type";
 import {
   Button,
@@ -7,24 +7,20 @@ import {
   HtmlInputrops,
   Segment,
 } from "semantic-ui-react";
+import * as Histroy from "history";
 import cuid from "cuid";
-import { NavLink } from "react-router-dom";
+import { NavLink, RouteComponentProps } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../app/api/re-dux/events/store";
+import { createEvent, updateEvent } from "../../../app/api/re-dux/events/slice";
 
-type Props = {
-  setFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
-  createEvent: (event: Event) => void;
-  updateEvent: (updateEvent: Event) => void;
-  selectedEvent: Event | null;
-};
+export default function EventForm(props: RouteComponentProps<{ id: string }>) {
+  const { match, history } = props;
+  const dispatch = useDispatch();
+  const selectedEvent = useSelector((state: RootState) =>
+    state.events.events.find((e) => e.id === match.params.id)
+  );
 
-export default function EventForm({
-  setFormOpen,
-  setEvents,
-  createEvent,
-  updateEvent,
-  selectedEvent,
-}: Props) {
   const initialValues = selectedEvent ?? {
     title: "",
     category: "",
@@ -38,15 +34,17 @@ export default function EventForm({
 
   const handleFormSubmit = () => {
     selectedEvent
-      ? updateEvent({ ...selectedEvent, ...values })
-      : createEvent({
-          ...values,
-          id: cuid(),
-          hostedBy: "Bob",
-          hostPhotoURL: "",
-          attendees: [],
-        });
-    setFormOpen(false);
+      ? dispatch(updateEvent({ ...selectedEvent, ...values }))
+      : dispatch(
+          createEvent({
+            ...values,
+            id: cuid(),
+            hostedBy: "Bob",
+            hostPhotoURL: "",
+            attendees: [],
+          })
+        );
+    history.push("/events");
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

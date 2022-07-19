@@ -1,15 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { List, Icon, Item, Segment, Button } from "semantic-ui-react";
+import { deleteEvent } from "../../../app/api/re-dux/events/slice";
 import { Event } from "../../../type/type";
 import EventListAttendee from "./EventListAttendee";
 
 type Props = {
   event: Event;
-  deleteEvent: (id: string) => void;
 };
 
-export default function EventListItem({ event, deleteEvent }: Props) {
+export default function EventListItem({ event }: Props) {
+  const dispatch = useDispatch();
+
   return (
     <Segment.Group>
       <Segment>
@@ -48,14 +51,14 @@ export default function EventListItem({ event, deleteEvent }: Props) {
       <Segment clearing>
         <div>{event.description}</div>
         <Button
-          onClick={() => deleteEvent(event.id)}
+          onClick={() => dispatch(deleteEvent(event.id))}
           color="red"
           floated="right"
           content="Delete"
         />
         <Button
           as={NavLink}
-          to={"/events/:id"}
+          to={`events/${event.id}`}
           color="teal"
           floated="right"
           content="View"

@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Event } from "../../../type/type";
 import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
 
-export default function EventDetailedHeader() {
+type Props = {
+  event: Event | undefined;
+};
+export default function EventDetailedHeader({ event }: Props) {
   const eventImageTextStyle = {
     position: "absolute",
     bottom: "5%",
@@ -20,7 +24,7 @@ export default function EventDetailedHeader() {
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/drinks.jpg`}
+          src={`/assets/categoryImages/${event?.category}.jpg`}
           fluid
           style={eventImageStyle}
         />
@@ -31,12 +35,12 @@ export default function EventDetailedHeader() {
               <Item.Content>
                 <Header
                   size="huge"
-                  content="Event Title"
+                  content={event?.title}
                   style={{ color: "white" }}
                 />
-                <p>Event Date</p>
+                <p>{event?.date}</p>
                 <p>
-                  Hosted by <strong>Bob</strong>
+                  Hosted by <strong>{event?.hostedBy}</strong>
                 </p>
               </Item.Content>
             </Item>
@@ -49,8 +53,8 @@ export default function EventDetailedHeader() {
         <Button color="teal">JOIN THIS EVENT</Button>
 
         <Button
-          // as={NavLink}
-          // to={`/manage/${event.id}`}
+          as={NavLink}
+          to={`/manage/${event!.id}`}
           color="orange"
           floated="right"
         >

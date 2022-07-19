@@ -4,18 +4,13 @@ import EventListItem from "./EventListItem";
 
 type Props = {
   events: Event[];
-  deleteEvent: (id: string) => void;
 };
 
-export default function EventList({ events, deleteEvent }: Props) {
+export default function EventList({ events }: Props) {
   return (
     <>
       {events.map((event) => (
-        <EventListItem
-          event={event}
-          key={event.id}
-          deleteEvent={deleteEvent}
-        ></EventListItem>
+        <EventListItem event={event} key={event.id}></EventListItem>
       ))}
     </>
   );

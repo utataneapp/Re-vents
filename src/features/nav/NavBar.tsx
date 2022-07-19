@@ -21,6 +21,7 @@ export default function NavBar() {
           Re-vents
         </Menu.Item>
         <Menu.Item as={NavLink} exact to="/events" content="Events" />
+        <Menu.Item as={NavLink} exact to="/sandbox" content="Sandbox" />
         {authentificated && (
           <Menu.Item as={NavLink} exact to="/createEvent">
             <Button

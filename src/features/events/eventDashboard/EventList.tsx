@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import { SetStateAction } from "react";
 import { Event } from "../../../type/type";
 import EventListItem from "./EventListItem";
 

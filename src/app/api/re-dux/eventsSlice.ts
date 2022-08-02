@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { sampleData } from "../../sampleData";
-import { Event } from "../../../../type/type";
+import { sampleData } from "../sampleData";
+import { Event } from "../../../type/type";
 
 export const eventsSlice = createSlice({
   name: "events",

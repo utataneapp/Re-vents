@@ -1,5 +1,5 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import { format } from "date-fns";
 import { Event } from "../../../type/type";
 import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
 
@@ -38,7 +38,7 @@ export default function EventDetailedHeader({ event }: Props) {
                   content={event?.title}
                   style={{ color: "white" }}
                 />
-                <p>{event?.date}</p>
+                <p>{format(event!.date, "MMMM d,yyyy h:mm a")}</p>
                 <p>
                   Hosted by <strong>{event?.hostedBy}</strong>
                 </p>

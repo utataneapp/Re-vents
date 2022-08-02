@@ -1,9 +1,9 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { List, Icon, Item, Segment, Button } from "semantic-ui-react";
-import { deleteEvent } from "../../../app/api/re-dux/events/slice";
+import { deleteEvent } from "../../../app/api/re-dux/eventsSlice";
 import { Event } from "../../../type/type";
+import { format } from "date-fns";
 import EventListAttendee from "./EventListAttendee";
 
 type Props = {
@@ -33,7 +33,7 @@ export default function EventListItem({ event }: Props) {
       <Segment>
         <span>
           <Icon name="clock" />
-          {event.date}
+          {format(event.date, "MMMM d, yyyy h:mm a")}
           <Icon name="marker" />
           {event.venue}
         </span>

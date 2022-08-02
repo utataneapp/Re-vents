@@ -1,15 +1,16 @@
-import React, { SetStateAction } from "react";
+import { SetStateAction } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Menu } from "semantic-ui-react";
+import { openModal } from "../../app/api/re-dux/modalSlice";
 
-type Props = {
-  setAuthentificated: React.Dispatch<SetStateAction<boolean>>;
-};
-
-export default function SignedOutMenu({ setAuthentificated }: Props) {
+export default function SignedOutMenu() {
+  const dispatch = useDispatch();
   return (
     <Menu.Item position="right">
       <Button
-        onClick={() => setAuthentificated(true)}
+        onClick={() =>
+          dispatch(openModal({ modalTypes: "LoginForm", modalProps: {} }))
+        }
         basic
         inverted
         content="LogIn"

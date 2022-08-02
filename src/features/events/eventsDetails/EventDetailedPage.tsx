@@ -1,8 +1,7 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Grid } from "semantic-ui-react";
-import { RootState } from "../../../app/api/re-dux/events/store";
+import { RootState } from "../../../app/api/re-dux/store";
 import EventDetailedChat from "./EventDetailedChat";
 import EventDetailedHeader from "./EventDetailedHeader";
 import EventDetailedInfo from "./EventDetailedInfo";

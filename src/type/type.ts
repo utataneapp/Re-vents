@@ -1,7 +1,7 @@
 export type Event = {
   id: string;
   title: string;
-  date: string;
+  date: Date;
   category: string;
   description: string;
   city: string;
